@@ -1,4 +1,4 @@
-require('assert');
+const assert = require('assert');
 console.log(`
     5
    / \\
@@ -113,3 +113,4 @@ const deleteValueFromBST = (root, val) => {
 };
 console.log('\n ------- \n')
 console.log('after removing val 3 from tree', deleteValueFromBST(five, 3))
+assert(inorder(deleteValueFromBST(five, 3)).join('') === [2, 4, 5, 6, 7].join(''))
