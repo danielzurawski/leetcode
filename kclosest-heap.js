@@ -50,7 +50,7 @@ class MinHeap {
   }
 
   parentIndex(i) {
-    return Math.floor(i / 2);
+    return Math.floor(i + 1 / 2) - 1;
   }
 
   parent(i) {
