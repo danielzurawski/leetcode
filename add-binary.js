@@ -35,7 +35,9 @@ var addBinary = function(a, b) {
     return strC.reverse().join('');
 };
 
-
+var addBinary = function(a, b) {
+    return (parseInt(a, 2) + parseInt(b, 2)).toString(2)
+}
 // Cases:
 // 1) 0 + 0 -> sum = 0
 // 2) 1 + 0 -> sum = 1
