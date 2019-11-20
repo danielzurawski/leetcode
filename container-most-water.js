@@ -10,23 +10,19 @@
 
 
 var maxArea = function(height) {
-    let tallest = -Infinity;
-    let tallestIndex = -1;
-    for(let i = 0; i < height.length; i++) {
-        if (height[i] > tallest) {
-            tallest = height[i];
-            tallestIndex = i;
-        }
-    }
-    // console.log('tallestIndex', tallestIndex, tallest);
-    
     let mostWaterArea = -Infinity
-    for (let j = height.length - 1; j >= 0; j--) {
-        let area = Math.min(tallest, height[j]) * Math.abs(j - tallestIndex)
-        // console.log('area', area)
-        if (area > mostWaterArea) {
-            mostWaterArea = area;
+    let l = 0;
+    let r = height.length - 1;
+    let width = height.length - 1;
+    while (width > 0) {
+        let area = Math.min(height[l], height[r]) * width
+        mostWaterArea = Math.max(mostWaterArea, area)
+        if (height[l] < height[r]) {
+            l++;
+        } else {
+            r--;
         }
+        width--;
     }
 
     return mostWaterArea;
@@ -36,3 +32,5 @@ console.log('expect 49', maxArea([1,8,6,2,5,4,8,3,7]))
 console.log('expect 4', maxArea([4,3,2,1]))
 
 console.log('expect 4', maxArea([1,2,3,4]))
+console.log('expect 2', maxArea([1,2,1]))
+console.log('expect 5', maxArea([1,1,1,1,2,1])) // 4 * 1 = 4, 1 x 5 = 5
