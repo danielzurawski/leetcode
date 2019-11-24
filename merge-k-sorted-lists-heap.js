@@ -12,7 +12,7 @@ Output: 1->1->2->3->4->4->5->6
 
 class ListNode {
   constructor(val) {
-    this.value = val;
+    this.val = val;
     this.next = undefined;
   }
   insert(node) {
@@ -81,22 +81,29 @@ const input = [
   (new ListNode(2)).insert(new ListNode(6))
 ];
 
-const mergeKSorted = (input) => {
+const mergeKLists = (input) => {
   const minHeap = new MinHeap();
   input.forEach((node) => {
-    minHeap.insert(node.value)
-
+    if (!node) return;
+    minHeap.insert(node.val)      
+    
     let nextNode = node.next;
     while(nextNode) {
-      minHeap.insert(nextNode.value);
+      minHeap.insert(nextNode.val);
       nextNode = nextNode.next
     }
   });
+  
   let node = new ListNode(minHeap.pop())
+  if (!node.val) return node.next;
+
   while (minHeap.data.length > 0) {
-    node.insert(new ListNode(minHeap.pop()))
+    const newNode = new ListNode(minHeap.pop());
+    newNode.next = node;
+    node = newNode;
   }
   return node;
 };
+
 console.log('\n------')
-console.log('merged list', JSON.stringify(mergeKSorted(input)));
+console.log('merged list', JSON.stringify(mergeKLists(input)));
