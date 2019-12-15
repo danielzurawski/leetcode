@@ -21,10 +21,38 @@ var swapPairs = (head) => {
   if (!head || !head.next) return head;
 
   let next = head.next; // next => 2
-  head.next = swapPairs(next.next); // swapPairs(3)
+  head.next = swapPairs(next.next); // 1-> swapPairs(3)
   next.next = head; // 2->1
 
   return next; // 2
+};
+
+
+/*
+1->2  =>  2->1->null
+return new head
+
+1->2->3->4  =>  2->1->4->3
+*/
+var swapPairs = (head) => {
+  if (!head || !head.next) return head;
+  let dummy = new ListNode(-1)
+  dummy.next = head;
+
+  let prevNode = dummy; // -1 -> 1 -> 2 -> 3 -> 4
+
+  while (head && head.next) { // 2, 4
+    let next = head.next; // 2, 4
+
+    prevNode.next = next; // -1 -> 2 , 1 -> 4
+    head.next = next.next; // 1 -> 3, 3 -> null
+    next.next = head; // 2 -> 1, 4 -> 3
+
+    prevNode = head; // prevNode = 1;
+    head = head.next; // 1 = 3
+  }
+
+  return dummy.next;
 };
 
 var one = new ListNode(1);
