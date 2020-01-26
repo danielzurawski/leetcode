@@ -33,6 +33,16 @@ Then 4 is the first bad version.
  * };
  */
 
+
+// 0,1,2
+// G,B,B
+// 
+
+
+// 0,1,2,3,4
+// G,B,B,B,B
+// 
+
 /**
  * @param {function} isBadVersion()
  * @return {function}
@@ -51,8 +61,10 @@ var solution = function(isBadVersion) {
         return mid + 1;
       } else if (isBadVersion(mid)) {
         right = mid;
+      } else {
+        left = mid
       }
-      left = mid
     }
+    if (isBadVersion(left)) return left;
   };
 };
