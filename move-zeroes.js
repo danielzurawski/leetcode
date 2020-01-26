@@ -40,6 +40,17 @@ var moveZeroes = function(nums) {
   }
 };
 
+var moveZeroes = function(nums) {
+  let i = 0;
+  let lastFoundZero = 0;
+  while (i < nums.length) {
+    if (nums[i] != 0) {
+      [nums[i], nums[lastFoundZero++]] = [nums[lastFoundZero], nums[i]];
+    }
+    i++;
+  }
+}
+
 const a = [0,1,0,3,12]
 moveZeroes(a)
 console.log('moveZeroes([0,1,0,3,12])', a);
