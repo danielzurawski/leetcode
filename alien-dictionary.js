@@ -28,25 +28,25 @@ const getAlphabet = (order) => order.split('').reduce((acc, char, index) => ({
  */
 var isAlienSorted = function(words, order) {
   const alphabet = getAlphabet(order);
-  for (let w = 0; w < words.length-1; w++) {
+  for (let w = 0; w + 1 < words.length; w++) {
     let wordA = words[w];
     let wordB = words[w + 1];
 
     let charIndex = 0;
     let leadingWord = wordA.length > wordB.length ? wordA : wordB;
 
-    console.log('wordA', wordA, 'wordB', wordB);
     while (charIndex < leadingWord.length) {
-      console.log('is wordA[charIndex]', alphabet[wordA[charIndex]])
+      // console.log('is wordA[charIndex]', alphabet[wordA[charIndex]])
       if (wordA[charIndex] === wordB[charIndex]) {
         charIndex++
         continue;
       } else if (alphabet[wordA[charIndex]] < alphabet[wordB[charIndex]]) {
-        return true;
+        break;
       }
       return false;
     }
   }
+  return true;
 };
 
 
@@ -56,4 +56,21 @@ console.log('isAlienSorted', isAlienSorted(["bc","abc"], "abcdefghijklmno"), '==
 console.log('isAlienSorted', isAlienSorted(["abc","bc"], "abcdefghijklmno"), '== true');
 console.log('isAlienSorted', isAlienSorted(["abc","ab"], "abcdefghijklmno"), '== false');
 
+console.log('isAlienSorted', isAlienSorted(["abc","ab"], "abcdefghijklmno"), '== false');
+
+console.log('isAlienSorted', isAlienSorted(["fxasxpc","dfbdrifhp","nwzgs"], "zkgwaverfimqxbnctdplsjyohu"), '== false');
+console.log('isAlienSorted', isAlienSorted(["fxasxpc","dfbdrifhp",], "zkgwaverfimqxbnctdplsjyohu"), '== true');
+
+
+
+console.log('isAlienSorted', isAlienSorted([
+  "fxasxpc","dfbdrifhp","nwzgs","cmwqriv","ebulyfyve","miracx","sxckdwzv","dtijzluhts","wwbmnge","qmjwymmyox"
+], "zkgwaverfimqxbnctdplsjyohu"), '== false');
+
+
 // console.log('isAlienSorted', isAlienSorted(["hello","leetcode"], "hlabcdefgijkmnopqrstuvwxyz"));
+
+["fxasxpc","dfbdrifhp","nwzgs","cmwqriv","ebulyfyve","miracx","sxckdwzv","dtijzluhts","wwbmnge","qmjwymmyox"]
+"zkgwaverfimqxbnctdplsjyohu"
+
+//"abcdefgh","ijklm"
