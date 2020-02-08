@@ -1,0 +1,26 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "description": "LeetCode Exercise Solutions",
+  "main": "UNSOLVED-longest-substring-k-distinct.js",
+  "dependencies": {
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielzurawski/leetcode.git"
+  },
+  "author": "Daniel Zurawski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielzurawski/leetcode/issues"
+  },
+  "homepage": "https://github.com/danielzurawski/leetcode#readme"
+}
