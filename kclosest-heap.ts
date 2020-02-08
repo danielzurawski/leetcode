@@ -40,7 +40,6 @@ class MinHeap<T extends { value: number }> {
 
   heapify(): void {
     let i = this.heap.length - 1;
-    debugger;
     while (i > 0 && this.value(this.heap[i]) < this.value(this.parent(i))) {
       this.swap(i, this.parentIndex(i));
       i = this.parentIndex(i);
@@ -57,8 +56,7 @@ class MinHeap<T extends { value: number }> {
   }
 }
 
-const euclidean = (q1: number, p1: number, q2: number, p2: number) => {
-  debugger;
+const euclidean = (q1: number, p1: number, q2: number, p2: number): number => {
   return Math.sqrt(Math.pow(q1-p1, 2) + Math.pow(q2 - p2, 2));
 };
 
@@ -87,8 +85,6 @@ const kClosest = function(points: number[][], K: number): number[][] {
   }
   return nearestPoints;
 };
-
-
 
 /* Euclidean:
     sqrt((q1-p1)^2 + (q2-p2)^2)

@@ -33,7 +33,6 @@ class MinHeap {
     }
     heapify() {
         let i = this.heap.length - 1;
-        debugger;
         while (i > 0 && this.value(this.heap[i]) < this.value(this.parent(i))) {
             this.swap(i, this.parentIndex(i));
             i = this.parentIndex(i);
@@ -48,7 +47,6 @@ class MinHeap {
     }
 }
 const euclidean = (q1, p1, q2, p2) => {
-    debugger;
     return Math.sqrt(Math.pow(q1 - p1, 2) + Math.pow(q2 - p2, 2));
 };
 /**
