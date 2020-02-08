@@ -57,7 +57,7 @@ class MinHeap<T extends { value: number }> {
   }
 }
 
-const euclidean = (q1, p1, q2, p2) => {
+const euclidean = (q1: number, p1: number, q2: number, p2: number) => {
   debugger;
   return Math.sqrt(Math.pow(q1-p1, 2) + Math.pow(q2 - p2, 2));
 };
