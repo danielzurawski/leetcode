@@ -1,4 +1,3 @@
-"use strict";
 /*
 Say you have an array for which the ith element is the price of a given stock on day i.
 
@@ -20,39 +19,41 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 */
+
 /**
  * @param {number[]} prices
  * @return {number}
  */
-const maxProfit = (prices) => {
-    let profit = 0;
-    for (let i = 0; i < prices.length - 1; i++) {
-        for (let j = i + 1; j < prices.length; j++) {
-            profit = Math.max(prices[j] - prices[i], profit);
-        }
+const maxProfit = (prices: number[]) => {
+  let profit = 0;
+  for (let i = 0; i < prices.length - 1; i++) {
+    for (let j = i + 1; j < prices.length; j++) {
+      profit = Math.max(prices[j] - prices[i], profit);
     }
-    if (profit <= 0)
-        return 0;
-    return profit;
+  }
+  if (profit <= 0) return 0;
+  return profit;
 };
+
 /**
  * @param {number[]} prices
  * @return {number}
  */
-const maxProfitImproved = (prices) => {
-    let minPrice = Infinity;
-    let maxProfit = 0;
-    prices.forEach((price) => {
-        if (price < minPrice)
-            minPrice = price;
-        else if ((price - minPrice) > maxProfit)
-            maxProfit = price - minPrice;
-    });
-    return maxProfit;
-};
-console.log('maxProfit([7,1,5,3,6,4]):', maxProfit([7, 1, 5, 3, 6, 4]), '=== 5?');
-console.log('maxProfit([7,6,4,3,1]):', maxProfit([7, 6, 4, 3, 1]), '=== 0?');
-console.log('maxProfitImproved([7,1,5,3,6,4]):', maxProfitImproved([7, 1, 5, 3, 6, 4]), '=== 5?');
+const maxProfitImproved = (prices: number[]) => {
+  let minPrice = Infinity;
+  let maxProfit = 0;
+  prices.forEach((price) => {
+    if (price < minPrice) minPrice = price;
+    else if ((price - minPrice) > maxProfit) maxProfit = price - minPrice;
+  });
+  return maxProfit;
+}
+
+console.log('maxProfit([7,1,5,3,6,4]):', maxProfit([7,1,5,3,6,4]), '=== 5?');
+console.log('maxProfit([7,6,4,3,1]):', maxProfit([7,6,4,3,1]), '=== 0?');
+
+console.log('maxProfitImproved([7,1,5,3,6,4]):', maxProfitImproved([7,1,5,3,6,4]), '=== 5?');
+
 // [7,1,5,3,6,4]
 //    |
 //    buy   |
