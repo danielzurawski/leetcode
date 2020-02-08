@@ -39,7 +39,7 @@ const maxProfit = (prices: number[]) => {
  * @param {number[]} prices
  * @return {number}
  */
-const maxProfitImproved = (prices: number[]) => {
+const maxProfitImproved = (prices: number[]): number => {
   let minPrice = Infinity;
   let maxProfit = 0;
   prices.forEach((price) => {
