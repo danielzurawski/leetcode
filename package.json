@@ -4,6 +4,9 @@
   "description": "LeetCode Exercise Solutions",
   "main": "UNSOLVED-longest-substring-k-distinct.js",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.0",
     "ts-node": "^8.6.2",
