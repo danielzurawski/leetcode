@@ -20,16 +20,17 @@ Explanation: Return true because "applepenapple" can be segmented as "apple pen 
 
 */
 
-const wordBreakRecurse = (s: string, wordDict: Set<string>, left: number, memo: boolean[]): boolean => {
+const wordBreakRecurse = (s: string, wordDict: Set<string>, left: number, guess: string, memo: boolean[]): boolean => {
+  // console.log('guess', guess, 'start', left);
   let right = left;
   if (right == s.length) return true;
 
   if (memo[left] !== undefined) return memo[left];
 
   while (right < s.length) {
-    const substr = s.substring(left, right + 1);
+    const guess = s.substring(left, right + 1);
     right++;
-    if (wordDict.has(substr) && wordBreakRecurse(s, wordDict, right, memo)) {
+    if (wordDict.has(guess) && wordBreakRecurse(s, wordDict, right, guess, memo)) {
       return memo[left] = true;
     }
   }
@@ -43,7 +44,7 @@ const wordBreakRecurse = (s: string, wordDict: Set<string>, left: number, memo: 
  */
 const wordBreak = function(s: string, wordDict: string[]): boolean {
   const wordSet = new Set(wordDict);
-  return wordBreakRecurse(s, wordSet, 0, []);
+  return wordBreakRecurse(s, wordSet, 0, '', []);
 };
 
 console.log('wordBreak("leetcode", ["leet", "code"])',
@@ -58,6 +59,9 @@ console.log('wordBreak("catsanddog", ["cats", "dog", "sand", "and", "cat"])',
   wordBreak('catsanddog', ["cats", "dog", "sand", "and", "cat"]));
 console.log('wordBreak("aaaaaaa", ["aaaa", "aaa"]) ',
   wordBreak('aaaaaaa', ['aaaa', 'aaa']));
+
+console.log('wordBreak("aaab", ["a", "aa", "aaa"])',
+  wordBreak("aaab", ["a", "aa", "aaa"]));
 
 
 
