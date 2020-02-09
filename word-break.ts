@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /*
 Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
 
@@ -45,12 +46,18 @@ const wordBreak = function(s: string, wordDict: string[]): boolean {
   return wordBreakRecurse(s, wordSet, 0, []);
 };
 
-console.log('wordBreak("leetcode", ["leet", "code"])', wordBreak('leetcode', ['leet', 'code']));
-console.log(' wordBreak("applepenapple", ["apple", "pen"])', wordBreak('applepenapple', ["apple", "pen"]));
-console.log('wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])', wordBreak('catsandog', ["cats", "dog", "sand", "and", "cat"]));
-console.log('wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])', wordBreak('catsandog', ["cats", "dog", "sand", "and", "cat"]));
-console.log('wordBreak("catsanddog", ["cats", "dog", "sand", "and", "cat"])', wordBreak('catsanddog', ["cats", "dog", "sand", "and", "cat"]));
-console.log('wordBreak("aaaaaaa", ["aaaa", "aaa"]) ', wordBreak('aaaaaaa', ['aaaa', 'aaa']));
+console.log('wordBreak("leetcode", ["leet", "code"])',
+  wordBreak('leetcode', ['leet', 'code']));
+console.log(' wordBreak("applepenapple", ["apple", "pen"])',
+  wordBreak('applepenapple', ["apple", "pen"]));
+console.log('wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])',
+  wordBreak('catsandog', ["cats", "dog", "sand", "and", "cat"]));
+console.log('wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])',
+  wordBreak('catsandog', ["cats", "dog", "sand", "and", "cat"]));
+console.log('wordBreak("catsanddog", ["cats", "dog", "sand", "and", "cat"])',
+  wordBreak('catsanddog', ["cats", "dog", "sand", "and", "cat"]));
+console.log('wordBreak("aaaaaaa", ["aaaa", "aaa"]) ',
+  wordBreak('aaaaaaa', ['aaaa', 'aaa']));
 
 
 
