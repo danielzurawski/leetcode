@@ -67,7 +67,7 @@ const combinationsRecurse = (n: number, k: number, pair: number[], first: number
     return;
   }
   while (first <= n) {
-
+    console.log('first', first)
     // console.log('first', first, 'will pass', [...pair, first])
     // eslint-disable-next-line no-param-reassign
     combinationsRecurse(n, k, [...pair, first], ++first, answers);
