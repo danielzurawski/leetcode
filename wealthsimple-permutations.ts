@@ -1,4 +1,3 @@
-"use strict";
 /* eslint-disable no-param-reassign */
 /*
 Tax Loss Harvesting Combinations
@@ -82,36 +81,66 @@ Given the example above, output would look something like:
    {ZUD: 10, ZRE: 20, VCN: 20, ZCS: 30, ZFM: 20},
 ]
 */
-const permutationsRecurse = (tickers, first, currentPortfolio, allCombinations, maxPortfolioLength) => {
-    if (Object.keys(currentPortfolio).length === maxPortfolioLength) {
-        allCombinations.push(Object.assign({}, currentPortfolio));
-        return [];
+
+interface Ticker {
+  symbol: string;
+  allocation: number;
+  secondary?: string;
+}
+
+type TickerPair = {[key: string]: number};
+
+const permutationsRecurse = (
+  tickers: Ticker[],
+  first: number,
+  currentPortfolio: TickerPair,
+  allCombinations: TickerPair[],
+  maxPortfolioLength: number,
+): TickerPair[] => {
+  if (Object.keys(currentPortfolio).length === maxPortfolioLength) {
+    allCombinations.push(Object.assign({}, currentPortfolio));
+    return [];
+  }
+
+  const ticker = tickers[first];
+  for (let i = 0; i < 2; i++) {
+    let tickerSymbol;
+    if (i == 0) {
+      tickerSymbol = ticker.symbol;
+    } else if (ticker.secondary){
+      tickerSymbol = ticker.secondary;
+    } else {
+      continue;
     }
-    const ticker = tickers[first];
-    for (let i = 0; i < 2; i++) {
-        let tickerSymbol;
-        if (i == 0) {
-            tickerSymbol = ticker.symbol;
-        }
-        else if (ticker.secondary) {
-            tickerSymbol = ticker.secondary;
-        }
-        else {
-            continue;
-        }
-        currentPortfolio[tickerSymbol] = ticker.allocation;
-        permutationsRecurse(tickers, first + 1, currentPortfolio, allCombinations, maxPortfolioLength);
-        delete currentPortfolio[tickerSymbol];
-    }
-    return allCombinations;
+
+    currentPortfolio[tickerSymbol] = ticker.allocation;
+
+    permutationsRecurse(
+      tickers,
+      first + 1,
+      currentPortfolio,
+      allCombinations, 
+      maxPortfolioLength,
+    );
+    
+    delete currentPortfolio[tickerSymbol];
+  }
+
+  return allCombinations;
 };
-const permutations = (allocations) => {
-    const maxLength = allocations.length;
-    if (!maxLength)
-        return [];
-    const allCombinations = [];
-    return permutationsRecurse(allocations, 0, {}, allCombinations, maxLength);
-};
+
+
+const permutations = (allocations: Ticker[]): TickerPair[] => {
+  const maxLength = allocations.length;
+
+  if (!maxLength) return [];
+  const allCombinations: TickerPair[] = [];
+
+  return permutationsRecurse(allocations, 0, {}, allCombinations, maxLength);
+}
+
+
+
 /*
 create portfolio
 iterate from i to 2
@@ -119,58 +148,70 @@ iterate from i to 2
     recurse (tickerIndex + 1 ,currentPorfolio)
     remove ticker from current portfolio
 */
+
 // currentPorfolio  |   index  | allCombinations   | isSecondary
 // {}                   0        []                  false
 // {PDF: 10}            1        []                  true
 // {PDF: 10, ZRE:20}    2        [{PDF: 10,ZRE:20]   false
 // keys(currentPoftiolo).length == maxPortfolioLength push
+
 // first solve for first / non-secondary
 // PDF + PHR
 // PDF + ZRE
 // ZUD + PHR
 // ZUD + ZRE
-const testA = [{
-        symbol: "PDF",
-        allocation: 10,
-        secondary: "ZUD"
-    },
-    {
-        symbol: "PHR",
-        allocation: 20,
-        secondary: "ZRE"
-    }];
-console.log(`permutations(${JSON.stringify(testA)}):`, permutations(testA), ` === [
+
+const testA: Ticker[] = [{
+  symbol:     "PDF",
+  allocation: 10,
+  secondary:  "ZUD"
+},
+{
+  symbol:     "PHR",
+  allocation: 20,
+  secondary:  "ZRE"
+}];
+console.log(
+  `permutations(${JSON.stringify(testA)}):`, 
+  permutations(testA),
+  ` === [
     {PDF: 10, PHR: 20}, 
     {PDF: 10, ZRE:20}, 
     {ZUD: 10, PHR: 20}, 
     {ZUD: 10, ZRE: 20}
-  ]`);
-const testB = [
-    {
-        symbol: "PDF",
-        allocation: 10,
-        secondary: "ZUD"
-    },
-    {
-        symbol: "PHR",
-        allocation: 20,
-        secondary: "ZRE"
-    },
-    {
-        symbol: "XIC",
-        allocation: 20,
-        secondary: "VCN"
-    },
-    {
-        symbol: "ZCS",
-        allocation: 30,
-    },
-    {
-        symbol: "ZFM",
-        allocation: 20,
-    }
-];
-console.log(`permutations(${JSON.stringify(testB)}):`, permutations(testB), ` === [
+  ]`
+);
+
+
+const testB: Ticker[] = [
+  {
+    symbol:     "PDF",
+    allocation: 10,
+    secondary:  "ZUD"
+  },
+  {
+    symbol:     "PHR",
+    allocation: 20,
+    secondary:  "ZRE"
+  },
+  {
+    symbol:     "XIC",
+    allocation: 20,
+    secondary:  "VCN"
+  },
+  {
+    symbol: "ZCS",
+    allocation: 30,
+  },
+  {
+    symbol: "ZFM",
+    allocation: 20,
+  }
+]
+console.log(
+  `permutations(${JSON.stringify(testB)}):`, 
+  permutations(testB),
+  ` === [
     {PDF: 10, PHR: 20, XIC: 20, ZCS: 30, ZFM: 20},
     {ZUD: 10, PHR: 20, XIC: 20, ZCS: 30, ZFM: 20},
     {PDF: 10, ZRE: 20, XIC: 20, ZCS: 30, ZFM: 20},
@@ -179,4 +220,5 @@ console.log(`permutations(${JSON.stringify(testB)}):`, permutations(testB), ` ==
     {ZUD: 10, PHR: 20, VCN: 20, ZCS: 30, ZFM: 20},
     {PDF: 10, ZRE: 20, VCN: 20, ZCS: 30, ZFM: 20},
     {ZUD: 10, ZRE: 20, VCN: 20, ZCS: 30, ZFM: 20},
-  ]`);
+  ]`
+);
