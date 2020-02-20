@@ -16,7 +16,10 @@ Output:
  */
 const groupAnagrams = (strs: string[]): string[][] => {
   const anagrams: {[key: string]: string[]} = {};
+  const cache: {[key: string]: string} = {};
+
   strs.forEach((str) => {
+    if (cache[str]) return;
     const strArr = str.split('');
     const sorted = strArr.sort().join('');
     if (!anagrams[sorted]) {
