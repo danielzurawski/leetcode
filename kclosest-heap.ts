@@ -108,3 +108,7 @@ const kClosest = function(points: number[][], K: number): number[][] {
 
 // p1 = 1
 // p2 = 2
+
+console.log('kClosest([[6,10],[-3,3],[-2,5],[0,2]], 3)', kClosest([[6,10],[-3,3],[-2,5],[0,2]], 3));
+// [[6,10],[-3,3],[-2,5],[0,2]]
+// 3
